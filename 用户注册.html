@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户注册</title>
+</head>
+<script language="javascript">
+function checkform(){
+	if(checkno()&&checkname()&&checkpassword()&& checkpassword1()&&checksex()&&checklove()&&checkdept()&&checkclass()){
+		return true;
+	}else{
+		return false;
+	}
+  }
+
+
+//学号非空+长度+合法性验证
+function checkno(){
+	var no=document.myform.textno;
+	if(no.value==""){
+		alert("请输入学号");
+		no.focus();
+		return false;
+	}
+	if(no.value.length!=5){
+		alert("学号长度为5位");
+		no.select();
+		return false;
+	}
+	if(isNaN(no.value)) 
+		 {
+		  alert("学号包含非法字符，只能包括数字");
+		  no.select();
+		  return false;
+		  }
+	return true;
+  }
+
+function checkname(){
+	var name=document.myform.yourname;
+	if(name.value==""){
+		alert("请输入姓名");
+		name.focus();
+		return false;
+	}
+	if(name.value.length>8){
+		alert("姓名最多8个字符");
+		name.select();
+		return false;
+	 }
+	  return true;
+}
+
+function checkpassword(){
+	var pa=document.myform.pwd;
+	if(pa.value==""){
+		alert("请输入密码");
+		pa.focus();
+		return false;
+	}
+	
+	var letter=0,num=0;
+        for(var a=0;a<pa.value.length;a++){
+          if((pa.value[a]>='A'&&pa.value[a]<='Z')||(pa.value[a]>='a'&&pa.value[a]<='z'))letter++;
+            else if(pa.value[a]>='0'&&pa.value[a]<='9')num++;
+                                    }
+           if(letter&&num){}
+		   
+		   else{
+               alert("密码不能单纯只包含字母或数字,请重新输入.");
+               pa.focus()
+          return false;
+			    }
+	
+    
+	return true;
+  }
+
+
+
+function checkpassword1(){
+	var pa=document.myform.pwd;
+	var pa1=document.myform.pwd2;
+	if(pa1.value==""){
+		alert("请确认密码");
+		pa1.focus();
+		return false;
+	}
+	
+	if(pa1.value!=pa.value){
+		alert("两次输入的密码不一致,请重新输入.");
+		return false;
+	}
+
+	return true;
+  }
+
+
+
+
+function checksex(){
+	var s1=document.myform.sex[0].checked
+	var s2=document.myform.sex[1].checked
+	if(s1==false&&s2==false ){
+		alert("请选择性别");
+		return false;
+	}
+	  return true;
+}
+
+
+
+
+function checklove()
+  {
+    c=0;
+	for (var i=0;i<document.myform.hobby.length;i++)
+     {
+      if (document.myform.hobby[i].checked==true)
+      c++;
+     }
+	if (c==0){
+	    alert("请选择爱好");
+		return false;
+	}
+	    return true;
+}
+
+
+ 
+
+
+
+function checkclass(){
+	if (document.myform.class.selectedIndex==0){
+		alert("请选择专业班级");
+		return false;
+	}
+	    return true;
+}
+</script>
+
+
+<body>
+<form action="insert.asp" method="post" name="myform"  onsubmit="return checkform()"  >
+<table  width="433" border="1" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td width="84" bgcolor="#00FF00">账号</td>
+    <td width="343" bgcolor="#00FF00">
+   
+      <input type="text" name="textno" id="text1" />
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#00FFFF">姓名</td>
+    <td bgcolor="#00FFFF"><input type="text" name="yourname"  /></td>
+  </tr>
+  <tr>
+    <td bgcolor="#00CCFF">密码</td>
+    <td bgcolor="#00CCFF">
+     <input type="password" name="pwd"  />
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#00FF00">密码确认</td>
+    <td bgcolor="#00FF00">
+      <input type="password" name="pwd2"  />
+    </td>
+  </tr>
+  <tr>
+    <td height="28" bgcolor="#00FFFF">性别</td>
+    <td bgcolor="#00FFFF">
+         <input name="sex" type="radio"  value="男" />
+          男
+        <input  name="sex" type="radio" value="女"  />
+        女
+     
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#00CCFF">爱好</td>
+    <td bgcolor="#00CCFF">
+      <input name="hobby" type="checkbox" id="爱好" value="足球"  />足球
+      <input name="hobby" type="checkbox" id="爱好" value="篮球"  />篮球
+      <input name="hobby" type="checkbox" id="爱好" value="篮球"  />电影
+      <input name="hobby" type="checkbox" id="爱好" value="看书"  />看书
+      <input name="hobby" type="checkbox" id="爱好" value="跑步"  />跑步
+   </td>
+  </tr>
+  <tr>
+    <td bgcolor="#00FF00">专业班级</td>
+    <td bgcolor="#00FF00">
+        <select name="class" >
+          <option>信管1601</option>
+          <option>信管1602</option>
+          <option>信管1603</option>
+        </select>
+    </td>
+  </tr>
+  <tr>
+    <td height="252" bgcolor="#00FFFF">个人图像</td>
+    <td bgcolor="#00FFFF"><img src="IMG_20170926_172038.jpg" width="168" height="250" /></td>
+  </tr>
+  <tr>
+    <td height="38" bgcolor="#00CCFF">文件上传</td>
+    <td height="38" bgcolor="#00CCFF">
+      <div align="center">
+        <input type="file" name="选择文件" id="选择文件" />
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td height="30" colspan="2" bgcolor="#99FF00">
+        <div align="center">
+          <input type="submit" name="button" id="button" value="确认" onclik=""/>
+          <input type="reset" name="button2" id="button2" value="重置" />
+        </div>
+</td>
+  </tr>
+</table></form>
+</body>
+</html>
+
